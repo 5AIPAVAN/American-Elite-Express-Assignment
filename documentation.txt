@@ -1,0 +1,158 @@
+# API Routes Assignment
+
+In this assignment, we'll explore a set of Express.js routes designed for user authentication and profile management. These routes cover creating a new user, user login, following/unfollowing users, updating user profiles, deleting user accounts, and fetching user details for posts.
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT for authentication
+- Express middleware for security (rate limiting, helmet, and MongoDB Operator Injection prevention)
+
+## Dependencies
+
+- express
+- dotenv
+- bcryptjs
+- jsonwebtoken
+- mongoose
+- express-rate-limit
+- helmet
+- express-mongo-sanitize
+
+## Route Descriptions
+
+### 1. Create New User
+
+- **Method:** POST
+- **Endpoint:** `/create/user`
+- **Middleware:** Rate limiting
+- **Description:** Creates a new user account with provided details such as username, email, password, bio, and profile picture.
+- **Validation:** Express-validator is used for input validation.
+- **Response:** Returns a JWT token and user details upon successful account creation.
+
+example use case:-
+ {
+  "username":"newuser",
+  "email":"newuser@gmail.com",
+  "password":"newuser",
+  "bio":"newuser is here this is his bio",
+  "profilepicture":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqcidvK5go1moX6fiKORRx2BsMRtWibnUYLA&usqp=CAU"
+}
+
+
+
+
+### 2. User Login
+
+- **Method:** POST
+- **Endpoint:** `/login`
+- **Middleware:** Rate limiting
+- **Description:** Authenticates a user based on email and password.
+- **Validation:** Validates email and password using Express-validator.
+- **Response:** Returns a JWT token and user details upon successful login.
+
+example usecase:-
+{
+  "email":"newuser@gmail.com",
+  "password":"newuser"
+}
+
+
+
+### 3. Follow/Unfollow User
+
+- **Method:** PUT
+- **Endpoint:** `/follow/:id`
+- **Middleware:** Token verification
+- **Description:** Allows a logged-in user to follow/unfollow another user.
+- **Response:** Indicates successful follow/unfollow.
+
+example usecase:-
+localhost:4000/api/user/follow/65eaf76a76fd02ead754452d(id of user we want to follow)
+provide jwttoken in headers
+
+
+
+
+
+### 4. Update User Profile
+
+- **Method:** PUT
+- **Endpoint:** `/updateprofile/:id`
+- **Middleware:** Token verification
+- **Description:** Updates user profile details, including password, profile picture, bio, and username.
+- **Response:** Returns a message and the updated user details.
+
+exampleusecase:-
+{
+  "username":"PANDYAA HERE ",
+  "bio":"PANDYA-BHAI ENTERED THE CHAT "
+} with jwttoken of loggedin user
+
+
+### 5. Delete User Account
+
+- **Method:** DELETE
+- **Endpoint:** `/delete/:id`
+- **Middleware:** Token verification
+- **Description:** Deletes the user account.
+- **Response:** Returns a message upon successful account deletion.
+
+example usecase:-
+localhost:4000/api/user/delete/65ec10d7795002016477dbc3(logged in user id)
+provide jwttoken in headers
+
+
+### 6. Get User Details for a Post
+
+- **Method:** GET
+- **Endpoint:** `/post/user/details/:id`
+- **Description:** Fetches user details (excluding sensitive information) for a given user ID used in a post.
+
+
+
+
+### 7. View User Profile
+
+- **Method:** GET
+- **Endpoint:** `/viewprofile/:id`
+- **Description:** Fetches user details (excluding sensitive information) for a given user ID.
+
+exampleusecase:-
+localhost:4000/api/user/viewprofile/65ec07d2bbc4d63d5fe4617e (id of user)
+
+
+### 8. Get Following List
+
+- **Method:** GET
+- **Endpoint:** `/get/followings/:id`
+- **Description:** Fetches the list of users that the logged-in user is following.
+
+exampleusecase:-
+localhost:4000/api/user/get/followings/65ec07d2bbc4d63d5fe4617e(user id)
+
+### 9. Get Followers List
+
+- **Method:** GET
+- **Endpoint:** `/get/followers/:id`
+- **Description:** Fetches the list of users following the logged-in user.
+
+exampleusecase:-
+localhost:4000/api/user/get/followers/65eaf76a76fd02ead754452d
+
+### 10. Get Following Posts
+
+- **Method:** GET
+- **Endpoint:** `/followingposts`
+- **Middleware:** Token verification
+- **Description:** Fetches posts from users the logged-in user is following, ordered by the latest first.
+
+exampleusecase:-localhost:4000/api/user/followingposts
+provide jwttoken in headers
+
+## Conclusion
+
+These routes provide a comprehensive set of functionalities for user management in a social media application.

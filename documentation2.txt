@@ -1,0 +1,102 @@
+# Post Routes Assignment
+
+In this assignment, we'll explore a set of Express.js routes designed for handling posts in a social media application. These routes cover creating new posts, fetching user-specific posts, fetching posts by ID, updating posts, fetching all posts, adding comments, and deleting posts.
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT for authentication
+- Express middleware for security (rate limiting, helmet, and MongoDB Operator Injection prevention)
+
+## Dependencies
+
+- express
+- mongoose
+- helmet
+- express-rate-limit
+- express-mongo-sanitize
+
+## Route Descriptions
+
+### 1. Create New Post
+
+- **Method:** POST
+- **Endpoint:** `/createpost`
+- **Middleware:** Token verification
+- **Description:** Creates a new post with the provided description for the logged-in user.
+- **Response:** Returns the newly created post.
+
+exampleusecase:-
+{
+  "description":"DESCRIPTION OF NEW POST IS ENTERED HERE"
+}
+
+
+
+### 3. Fetch Post by ID
+
+- **Method:** GET
+- **Endpoint:** `/getpost/:id`
+- **Description:** Fetches a post by its unique ID.
+- **Response:** Returns the post details.
+
+exampleusecase:-
+localhost:4000/api/post/getpost/65eafd823b447f2e1dafd2f8
+
+
+### 4. Update Post
+
+- **Method:** PUT
+- **Endpoint:** `/updatepost/:id`
+- **Middleware:** Token verification
+- **Description:** Updates the description of a post owned by the logged-in user.
+- **Response:** Returns the updated post.
+
+exampleusecase:-
+{
+  "description":"ENTER UPDATED POST DESCRIPTION HERE"
+}
+
+
+### 5. Fetch All Posts
+
+- **Method:** GET
+- **Endpoint:** `/get/allpost`
+- **Middleware:** Token verification
+- **Description:** Fetches all posts present in the database.
+- **Response:** Returns an array of all posts.
+
+
+### 7. Add Comment on a Post
+
+- **Method:** PUT
+- **Endpoint:** `/comment/post`
+- **Middleware:** Token verification
+- **Description:** Adds a comment to a specific post.
+- **Response:** Returns a message indicating successful comment addition.
+
+exampleusecase:-
+{
+  "postId":"65eb1894e8f491edcdc8f85a",
+  "comment":"you are a legend dhoni bhai"
+}
+
+
+### 8. Delete Post
+
+- **Method:** DELETE
+- **Endpoint:** `/deletepost/:id`
+- **Middleware:** Token verification
+- **Description:** Deletes a post owned by the logged-in user.
+- **Response:** Returns a message upon successful deletion.
+
+exampleusecase:-
+localhost:4000/api/post/deletepost/65ec08acbbc4d63d5fe46188
+provide jwttoken in headers
+
+## Conclusion
+
+These routes provide essential functionalities for handling posts, comments, and post-related actions in a social media application.
